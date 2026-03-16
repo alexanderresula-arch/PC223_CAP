@@ -1,3 +1,54 @@
+// security
+function protectAdminPage() {
+    const currentPage = window.location.pathname.split("/").pop();
+    const role = localStorage.getItem("userRole");
+
+    // redirects user that doesn't have an admin badge
+    if (currentPage === "admin.html" && role !== "admin") {
+        window.location.replace("index.html"); 
+    }
+}
+protectAdminPage(); // immediately call back
+
+
+// login logic
+function login() {
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+
+    //admin logic
+    const adminTeam = ["admin", "member1", "member2", "member3"];
+    const adminPassword = "ctu123"; 
+
+    if (adminTeam.includes(user) && pass === adminPassword) {
+        localStorage.setItem("userRole", "admin");
+        localStorage.setItem("currentUser", user);
+        window.location.href = "admin.html";
+        return;
+    }
+
+    // user logic
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let validUser = users.find(u => u.username === user && u.password === pass);
+
+    if (validUser) {
+        localStorage.setItem("userRole", "user");
+        localStorage.setItem("currentUser", user);
+        window.location.href = "user.html";
+    } else {
+        alert("Invalid username or password");
+    }
+}
+
+
+// logout function
+function logout() {
+    // clear everything when another user enters so they can start fresh
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("currentUser");
+    window.location.href = "index.html";
+}
+
 // DATABASE 
 function getPosts() {
     return JSON.parse(localStorage.getItem("allPosts")) || [];
@@ -83,8 +134,7 @@ function loadDashboard() {
     targetDiv.innerHTML = "";
 
     posts.forEach((p, index) => {
-        // If we are on the User page, we show everything. 
-        // If we are on a public feed (optional), we'd filter for "approved".
+        
         targetDiv.innerHTML += `
         <div class="post">
             <img src="${p.image}" class="post-img">
@@ -143,4 +193,29 @@ function addPost() {
     savePosts(posts);
     alert("Submitted! Wait for admin approval.");
     location.reload();
+}
+
+//logic for separating admin and users
+function login() {
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+
+    // ADMIN CHECK 
+    if (user === "admin" && pass === "ctu123") { // Choose a secure admin password
+        localStorage.setItem("userRole", "admin");
+        window.location.href = "admin.html";
+        return; 
+    }
+
+    // REGULAR USER CHECK
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let validUser = users.find(u => u.username === user && u.password === pass);
+
+    if (validUser) {
+        localStorage.setItem("userRole", "user");
+        localStorage.setItem("currentUser", user);
+        window.location.href = "user.html";
+    } else {
+        alert("Invalid username or password");
+    }
 }
