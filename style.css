@@ -1,3 +1,32 @@
+/* this parent container will take up space */
+main {
+  display: flex;
+  height: calc(100vh - 60px); /* Total screen height minus header */
+  width: 100%;
+}
+
+/* left side with the image */
+.login-image-section {
+  flex: 1; 
+  background: linear-gradient(rgba(44, 62, 80, 0.4), rgba(44, 62, 80, 0.4)), 
+              url('./images/ctu_background.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  min-height: 100%; /* force fill in main container */
+}
+
+/* right side(with form) */
+.login-form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f9;
+}
+
 /* GLOBAL SETTINGS */
 * {
   box-sizing: border-box;
@@ -41,14 +70,14 @@ main.split-screen {
 .login-image-section {
   .login-image-section {
   flex: 1;
-  /* Replace 'background.jpg' with the actual name/path of your saved image */
-  background: linear-gradient(rgba(44, 62, 80, 0.4), rgba(44, 62, 80, 0.4)), 
-              url('background.jpg') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  /* Use 'ctu_background.jpg' without the './' just to be sure */
+  background-image: url("ctu_background.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Temporary: Add this to see if the section even exists */
+  border: 5px solid red;
 }
 }
 
