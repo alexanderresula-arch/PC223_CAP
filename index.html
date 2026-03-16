@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">Lost & Found</div>
+    <nav>
+      <a href="admin.html" style="font-size: 0.8rem; opacity: 0.7;">Admin Access</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-image-section"></div>
+
+    <div class="login-form-section">
+      <div class="card">
+        
+        <div id="login-section">
+          <h2>Welcome Back</h2>
+          <input type="text" id="loginUser" placeholder="Username">
+          <input type="password" id="loginPass" placeholder="Password">
+          <button class="btn-secondary" onclick="login()">Log In</button>
+          <p class="toggle-text">Don't have an account? <a href="#" onclick="toggleAuth()">Sign Up</a></p>
+        </div>
+
+        <div id="signup-section" style="display: none;">
+          <h2>Create Account</h2>
+          <input type="text" id="newUser" placeholder="New username">
+          <input type="password" id="newPass" placeholder="New password">
+          <button class="btn-primary" onclick="signup()">Sign Up</button>
+          <p class="toggle-text">Already have an account? <a href="#" onclick="toggleAuth()">Log In</a></p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
