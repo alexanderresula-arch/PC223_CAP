@@ -5,40 +5,30 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header>
-    <div class="logo">Lost & Found</div>
+    <div class="logo">Lost & Found Portal</div>
     <nav>
-      <a href="index.html">Logout</a>
+      <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
 
-  <main style="display: block; height: auto; padding: 40px;">
-    <div class="card" style="margin: 0 auto;">
+  <div class="admin-container">
+    <div class="card" style="margin: 0 auto 40px auto;">
       <h3>Report a Lost Item</h3>
-      <input type="text" id="item" placeholder="Item name (e.g. iPhone 13)">
+      <input type="text" id="item" placeholder="Item name">
       <input type="text" id="location" placeholder="Where was it lost/found?">
-      <input type="text" id="itemImg" placeholder="Image URL (Link to a photo)">
+      <input type="text" id="itemImg" placeholder="Image URL (optional)">
+      <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you')">
       <textarea id="description" placeholder="Describe the item..."></textarea>
-      <button onclick="addPost()">Post for Approval</button>
+      <button class="btn-primary" onclick="addPost()">Post for Approval</button>
     </div>
 
-    <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
-    
-    <h2 style="text-align: center;">Recent Reports Status</h2>
+    <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 40px;">
+
+    <h2>Recent Approved Items</h2>
     <div id="userFeed" class="post-grid"></div>
-  </main>
+  </div>
 
   <script src="script.js"></script>
-
-  <div class="card" style="margin: 0 auto;">
-  <h3>Report a Lost Item</h3>
-  <input type="text" id="item" placeholder="Item name">
-  <input type="text" id="location" placeholder="Where was it lost/found?">
-  <input type="text" id="itemImg" placeholder="Image URL">
-  <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you note')">
-  <textarea id="description" placeholder="Describe the item..."></textarea>
-  <button onclick="addPost()">Post for Approval</button>
-</div>
 </body>
 </html>
