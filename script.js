@@ -147,3 +147,20 @@ function deletePost(index) {
 }
 
 window.onload = loadDashboard;
+
+/* Search bar's functions */
+function filterSearch() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const posts = document.querySelectorAll("#userFeed .post");
+
+    posts.forEach(post => {
+        // Look for the text inside the <h3> (Item Name)
+        const itemName = post.querySelector("h3").innerText.toLowerCase();
+        
+        if (itemName.includes(query)) {
+            post.style.display = "block"; // Show match
+        } else {
+            post.style.display = "none";  // Hide others
+        }
+    });
+}

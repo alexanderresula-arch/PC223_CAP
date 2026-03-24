@@ -91,3 +91,17 @@ input, textarea {
 }
 
 .approve-btn { background: #2ecc71; color: white; width: auto; margin-right: 5px; }
+
+/*Search bar prettying*/
+#searchInput {
+  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'); /* Optional: search icon */
+  padding-left: 15px;
+  font-size: 1.1rem;
+  border: 1px solid #3498db;
+  transition: 0.3s;
+}
+
+#searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
