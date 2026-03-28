@@ -8,20 +8,26 @@
   <header>
     <div class="logo">Lost & Found Portal</div>
     <nav>
+      <a href="user.html">Home</a> <a href="about.html">About</a>
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
 
   <div class="admin-container">
     <div class="card" style="margin: 0 auto 40px auto;">
-      <h3>Report a Lost Item</h3>
-      <input type="text" id="item" placeholder="Item name">
-      <input type="text" id="location" placeholder="Where was it lost/found?">
-      <input type="text" id="itemImg" placeholder="Image URL (optional)">
-      <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you')">
-      <textarea id="description" placeholder="Describe the item..."></textarea>
-      <button class="btn-primary" onclick="addPost()">Post for Approval</button>
+    <h3>Report a Lost Item</h3>
+    <input type="text" id="item" placeholder="Item name">
+    <input type="text" id="location" placeholder="Where was it lost/found?">
+    
+    <div style="text-align: left; margin: 10px 0;">
+        <label style="font-size: 0.8rem; color: #666;">Upload Photo:</label>
+        <input type="file" id="itemImg" accept="image/*" style="border: none; padding: 5px 0;">
     </div>
+
+    <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you')">
+    <textarea id="description" placeholder="Describe the item..."></textarea>
+    <button class="btn-primary" onclick="addPost()">Post for Approval</button>
+</div>
 
     <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 40px;">
 
@@ -33,6 +39,11 @@
     <div id="userFeed" class="post-grid"></div>
   </div>
 
-  <script src="script.js"></script>
-</body>
+  <!-- //CDN(Content Delivery Network) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<script src="script.js"></script>
+  <!-- //CDN(Content Delivery Network) -->
+  </body>
 </html>
