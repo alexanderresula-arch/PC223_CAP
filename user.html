@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Dashboard | Lost & Found</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,35 +17,38 @@
 
   <div class="admin-container">
     <div class="card" style="margin: 0 auto 40px auto;">
-    <h3>Report a Lost Item</h3>
-    <input type="text" id="item" placeholder="Item name">
-    <input type="text" id="location" placeholder="Where was it lost/found?">
-    
-    <div style="text-align: left; margin: 10px 0;">
+      <h3>Report a Lost Item</h3>
+      <input type="text" id="item" placeholder="Item name">
+      <input type="text" id="location" placeholder="Where was it lost/found?">
+      
+      <div style="text-align: left; margin: 10px 0;">
         <label style="font-size: 0.8rem; color: #666;">Upload Photo:</label>
         <input type="file" id="itemImg" accept="image/*" style="border: none; padding: 5px 0;">
-    </div>
+      </div>
 
-    <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you')">
-    <textarea id="description" placeholder="Describe the item..."></textarea>
-    <button class="btn-primary" onclick="addPost()">Post for Approval</button>
-</div>
+      <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you')">
+      <textarea id="description" placeholder="Describe the item..."></textarea>
+      <button class="btn-primary" onclick="addPost()">Post for Approval</button>
+
+      <!-- Success message shown after a post is submitted successfully -->
+      <p id="postStatusMsg" style="display:none; margin-top: 12px; padding: 10px 14px; background: #eafaf1; color: #27ae60; border: 1px solid #a9dfbf; border-radius: 6px; font-weight: bold;"></p>
+    </div>
 
     <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 40px;">
 
     <div style="margin-bottom: 20px;">
-  <input type="text" id="searchInput" onkeyup="filterSearch()" placeholder="Search for items (e.g., 'Wallet', 'Keys')..." style="border: 2px solid #3498db;">
-</div>
+      <input type="text" id="searchInput" onkeyup="filterSearch()" placeholder="Search for items (e.g., 'Wallet', 'Keys')..." style="border: 2px solid #3498db;">
+    </div>
 
     <h2>Recent Approved Items</h2>
     <div id="userFeed" class="post-grid"></div>
   </div>
 
-  <!-- //CDN(Content Delivery Network) -->
+  <!-- CDN (Content Delivery Network) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="script.js"></script>
+  <!-- CDN -->
 
-<script src="script.js"></script>
-  <!-- //CDN(Content Delivery Network) -->
-  </body>
+</body>
 </html>

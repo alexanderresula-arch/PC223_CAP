@@ -39,16 +39,18 @@ function addPost() {
 
     if (!item || !loc || !desc || !file) return alert("Please fill all details and pick a photo!");
 
+    // a "reader" to turn the image into text
     const reader = new FileReader();
+    
     reader.onload = function(e) {
-        const base64Image = e.target.result;
+        const base64Image = e.target.result; // makes image a text
 
         const postData = {
             item: item,
             location: loc,
             description: desc,
             reward: reward,
-            image: base64Image,
+            image: base64Image, // save the text string
             status: "pending",
             timestamp: Date.now()
         };
@@ -56,12 +58,25 @@ function addPost() {
         // this sends it to the Cloud
         database.ref('allPosts').push(postData)
             .then(() => {
-                alert("Success! Your post is pending admin approval ✅");
-                location.reload();
+                // Clear the form fields so the user knows it was submitted
+                document.getElementById("item").value = "";
+                document.getElementById("location").value = "";
+                document.getElementById("description").value = "";
+                document.getElementById("reward").value = "";
+                document.getElementById("itemImg").value = "";
+
+                // Show a visible on-page success message instead of alert + reload
+                const msg = document.getElementById("postStatusMsg");
+                msg.textContent = "✅ Your item has been submitted and is pending admin approval!";
+                msg.style.display = "block";
+
+                // Hide the message after 5 seconds
+                setTimeout(() => { msg.style.display = "none"; }, 5000);
             })
             .catch(err => alert("Error: " + err.message));
     };
-    reader.readAsDataURL(file);
+
+    reader.readAsDataURL(file); // Start the conversion
 }
 
 /* UI Rendering */
@@ -115,18 +130,6 @@ function deletePost(key) {
 }
 
 window.onload = loadDashboard;
-
-/* Security and access logic */
-function protectAdminPage() {
-    const currentPage = window.location.pathname.split("/").pop();
-    const role = localStorage.getItem("userRole");
-
-    // Subtle redirect if non-admin tries to access admin.html
-    if (currentPage === "admin.html" && role !== "admin") {
-        window.location.replace("index.html"); 
-    }
-}
-protectAdminPage();
 
 /* Login, Signup, Logout */
 function login() {
@@ -184,99 +187,6 @@ function toggleAuth() {
     loginSec.style.display = (loginSec.style.display === "none") ? "block" : "none";
     signupSec.style.display = (signupSec.style.display === "none") ? "block" : "none";
 }
-
-/* Post and reward logic */
-function getPosts() {
-    return JSON.parse(localStorage.getItem("allPosts")) || [];
-}
-
-function savePosts(posts) {
-    localStorage.setItem("allPosts", JSON.stringify(posts));
-}
-
-function addPost() {
-    const item = document.getElementById("item").value;
-    const loc = document.getElementById("location").value;
-    const desc = document.getElementById("description").value;
-    const reward = document.getElementById("reward").value || "No reward specified";
-    const fileInput = document.getElementById("itemImg");
-    const file = fileInput.files[0];
-
-    if (!item || !loc || !desc || !file) return alert("Please fill all details and pick a photo!");
-
-    // a "reader" to turn the image into text
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        const base64Image = e.target.result; // makes image a text
-
-        const postData = {
-            item: item,
-            location: loc,
-            description: desc,
-            reward: reward,
-            image: base64Image, // save the text string 
-            status: "pending",
-            timestamp: Date.now()
-        };
-
-        // saves it to database
-        database.ref('allPosts').push(postData)
-            .then(() => {
-                alert("Success! Your post (with image) is live.");
-                location.reload();
-            });
-    };
-
-    reader.readAsDataURL(file); // Start the conversion
-}
-
-/* UI Rendering */
-function loadDashboard() {
-    const adminDiv = document.getElementById("adminPosts");
-    const userDiv = document.getElementById("userFeed");
-    const posts = getPosts();
-    const targetDiv = adminDiv || userDiv;
-
-    if (!targetDiv) return;
-    targetDiv.innerHTML = "";
-
-    posts.forEach((p, index) => {
-        // Admins see everything and Users only see Approved items
-        if (adminDiv || p.status.includes("Approved")) {
-            targetDiv.innerHTML += `
-                <div class="post">
-                    <img src="${p.image}" class="post-img">
-                    <h3>${p.item}</h3>
-                    <p><b>📍 Location:</b> ${p.location}</p>
-                    <p class="reward-tag"><b>🎁 Reward:</b> ${p.reward}</p>
-                    <p>${p.description}</p>
-                    <p><strong>Status:</strong> ${p.status}</p>
-                    ${adminDiv ? `
-                        <button class="approve-btn" onclick="approvePost(${index})">Approve</button>
-                        <button onclick="deletePost(${index})" style="background:#e74c3c; color:white; border:none; margin-top:5px; padding:5px; border-radius:4px; cursor:pointer;">Delete</button>
-                    ` : ""}
-                </div>
-            `;
-        }
-    });
-}
-
-function approvePost(index) {
-    let posts = getPosts();
-    posts[index].status = "Approved by Admin ✅";
-    savePosts(posts);
-    loadDashboard();
-}
-
-function deletePost(index) {
-    let posts = getPosts();
-    posts.splice(index, 1);
-    savePosts(posts);
-    loadDashboard();
-}
-
-window.onload = loadDashboard;
 
 /* Search bar's functions */
 function filterSearch() {
