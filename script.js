@@ -55,7 +55,7 @@ function addPost() {
             timestamp: Date.now()
         };
 
-        // this sends it to the Clouds
+        // this sends it to the Cloud
         database.ref('allPosts').push(postData)
             .then(() => {
                 // Clear the form fields so the user knows it was submitted
