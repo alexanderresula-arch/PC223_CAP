@@ -55,7 +55,7 @@ function addPost() {
             timestamp: Date.now()
         };
 
-        // this sends it to the Cloud
+        // this sends it to the Clouds
         database.ref('allPosts').push(postData)
             .then(() => {
                 // Clear the form fields so the user knows it was submitted
@@ -65,7 +65,7 @@ function addPost() {
                 document.getElementById("reward").value = "";
                 document.getElementById("itemImg").value = "";
 
-                // Show a visible on-page success message instead of alert + reload
+                // Show a visible on-page success message instead of alert or reload
                 const msg = document.getElementById("postStatusMsg");
                 msg.textContent = "✅ Your item has been submitted and is pending admin approval!";
                 msg.style.display = "block";
@@ -105,6 +105,7 @@ function loadDashboard() {
                             <p class="reward-tag"><b>🎁 Reward:</b> ${p.reward}</p>
                             <p>${p.description}</p>
                             <p><strong>Status:</strong> ${p.status}</p>
+                            <p><strong>📅 Reported:</strong> ${new Date(p.timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                             ${adminDiv ? `
                                 <button class="approve-btn" onclick="approvePost('${key}')">Approve</button>
                                 <button onclick="deletePost('${key}')" style="background:#e74c3c; color:white; border:none; margin-top:5px; padding:5px; border-radius:4px; cursor:pointer;">Delete</button>
