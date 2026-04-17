@@ -25,8 +25,7 @@ function protectAdminPage() {
     }
 }
 protectAdminPage();
-
-
+ 
 
 /* cloud post logic */
 function addPost() {

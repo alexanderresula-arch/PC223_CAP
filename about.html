@@ -3,52 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>About Us | Lost & Found</title>
+  <!-- Links the external stylesheet that controls the visual appearance of this page -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- The top navigation bar shown on every page, containing the logo and nav links.
+       The About link has extra styling to show it as the currently active page. -->
   <header>
     <div class="logo">Lost & Found Portal</div>
     <nav>
+      <!-- Home brings both users and admins back to the user dashboard -->
       <a href="user.html">Home</a>
       <a href="about.html" style="font-weight: bold; border-bottom: 2px solid white;">About</a>
+      <!-- Calls the logout() function in script.js to end the session -->
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
 
   <main class="admin-container">
+
+    <!-- Main content card containing the mission statement and team section -->
     <div class="card" style="max-width: 800px; margin: 40px auto; text-align: left;">
+
+      <!-- Mission statement section explaining the purpose of the system -->
       <h2 style="text-align: center;">Our Mission</h2>
       <p style="line-height: 1.6; color: #555;">
         The <strong>Lost & Found Management System</strong> was designed to streamline the process of reporting and recovering items within our campus. By bridging the gap between finders and owners through a verified admin-approval process, we ensure a safe and honest community environment.
       </p>
 
+      <!-- Visual divider between the mission and team sections -->
       <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
 
+      <!-- Team section displaying each group member and their role.
+           Uses the "team-grid" CSS class to arrange members in a responsive grid layout. -->
       <h2 style="text-align: center;">Meet the Team</h2>
       <div class="team-grid">
         <div class="team-member">
           <h4>Alexander Resula</h4>
+          <p>Leader</p>
         </div>
-
         <div class="team-member">
           <h4>Christian Dilao Potot</h4>
-         </div>
-
-        <div class="team-member">
-          <h4>John Neil Alarde</h4>
-          </div>
-
+          <p>Member 1</p>
+        </div>
         <div class="team-member">
           <h4>Reigner Pepito</h4>
+          <p>Member 2</p>
+        </div>
+        <div class="team-member">
+          <h4>John Neil Alarde</h4>
+          <p>Member 3</p>
         </div>
       </div>
     </div>
   </main>
 
   <!-- CDN (Content Delivery Network) -->
+  <!-- These two scripts load Firebase from the internet. They MUST come before script.js
+       because script.js uses firebase, which won't exist unless these load first -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <!-- Our main JavaScript file containing all the logic for login, signup, and posts -->
   <script src="script.js"></script>
   <!-- CDN -->
 

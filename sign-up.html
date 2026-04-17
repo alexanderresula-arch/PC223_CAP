@@ -3,24 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>Create Account | Lost & Found</title>
+  <!-- Links the external stylesheet that controls the visual appearance of this page -->
   <link rel="stylesheet" href="style.css">
 </head>
+<!-- Centers the card vertically and horizontally on the page -->
 <body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
 
+  <!-- Standalone signup card for users who navigate directly to this page
+       instead of using the toggle on the login page -->
   <div class="card">
     <h3>Create Account</h3>
     <p class="toggle-text" style="margin-bottom: 20px;">Join the community to report items.</p>
     
+    <!-- Input field for the desired username -->
     <input type="text" id="newUser" placeholder="New username">
+
+    <!-- Input field for the desired password -->
     <input type="password" id="newPass" placeholder="New password">
+
+    <!-- Calls the signup() function in script.js to register the new account -->
     <button class="btn-primary" onclick="signup()">Sign Up</button>
     
+    <!-- Link back to the login page for users who already have an account -->
     <p class="toggle-text">Already have an account? <a href="index.html">Log In</a></p>
   </div>
 
   <!-- CDN (Content Delivery Network) -->
+  <!-- These two scripts load Firebase from the internet. They MUST come before script.js
+       because script.js uses firebase, which won't exist unless these load first -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <!-- Our main JavaScript file containing all the logic for login, signup, and posts -->
   <script src="script.js"></script>
   <!-- CDN -->
 

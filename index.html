@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lost & Found Portal</title>
+  <!-- Links the external stylesheet that controls the visual appearance of this page -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- The top navigation bar shown on every page, containing the logo and nav links -->
   <header>
     <div class="logo">Lost & Found</div>
     <nav>
-      <a href="user.html">Home</a> <a href="about.html">About</a>
-      </nav>
+      <a href="about.html">About</a>
+      <!-- Admin Access link is intentionally subtle (smaller, faded) so it's not obvious to regular users -->
+      <a href="admin.html" style="font-size: 0.8rem; opacity: 0.7;">Admin Access</a>
+    </nav>
   </header>
 
   <main>
+    <!-- Left half of the login screen: displays a background image with the portal title -->
     <div class="login-image-section">
       <div style="text-align: center; padding: 20px;">
         <h1 style="font-size: 3rem; margin-bottom: 10px;">Lost & Found</h1>
@@ -23,22 +28,29 @@
       </div>
     </div>
 
+    <!-- Right half of the login screen: contains the login and signup forms -->
     <div class="login-form-section">
       <div class="card">
         
+        <!-- Login form: shown by default when the page first loads -->
         <div id="login-section">
           <h2>Welcome Back</h2>
           <input type="text" id="loginUser" placeholder="Username">
           <input type="password" id="loginPass" placeholder="Password">
+          <!-- Calls the login() function in script.js when clicked -->
           <button class="btn-secondary" onclick="login()">Log In</button>
+          <!-- Calls toggleAuth() to switch to the signup form -->
           <p class="toggle-text">Don't have an account? <a href="#" onclick="toggleAuth()">Sign Up</a></p>
         </div>
 
+        <!-- Signup form: hidden by default, shown when the user clicks "Sign Up" -->
         <div id="signup-section" style="display: none;">
           <h2>Create Account</h2>
           <input type="text" id="newUser" placeholder="New username">
           <input type="password" id="newPass" placeholder="New password">
+          <!-- Calls the signup() function in script.js when clicked -->
           <button class="btn-primary" onclick="signup()">Sign Up</button>
+          <!-- Calls toggleAuth() to switch back to the login form -->
           <p class="toggle-text">Already have an account? <a href="#" onclick="toggleAuth()">Log In</a></p>
         </div>
 
@@ -47,8 +59,11 @@
   </main>
 
   <!-- CDN (Content Delivery Network) -->
+  <!-- These two scripts load Firebase from the internet. They MUST come before script.js
+       because script.js uses firebase, which won't exist unless these load first -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <!-- Our main JavaScript file containing all the logic for login, signup, and posts -->
   <script src="script.js"></script>
   <!-- CDN -->
 
