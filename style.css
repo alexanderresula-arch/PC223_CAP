@@ -1,7 +1,12 @@
 /* Global and header */
+/* Resets default browser spacing and sets the font for every element on the page */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+/* Sets the background color and default text color for the entire page */
 body { background-color: #f4f6f9; color: #2c3e50; }
 
+/* Styles the top navigation bar — dark background, horizontal layout with
+   logo on the left and nav links on the right, fixed height of 60px */
 header {
   background: #2c3e50;
   color: white;
@@ -13,12 +18,17 @@ header {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+/* Styles the "Lost & Found Portal" logo text in the header */
 header .logo { font-weight: bold; font-size: 1.2rem; }
+
+/* Styles all navigation links in the header — white text, no underline */
 nav a { color: white; margin-left: 15px; text-decoration: none; font-size: 0.9rem; cursor: pointer; }
 
 /* Login screen */
+/* Makes the login page a two-column side-by-side layout that fills the full viewport height */
 main { display: flex; height: calc(100vh - 60px); width: 100%; }
 
+/* Left side of the login screen — shows a background image with a dark overlay on top */
 .login-image-section {
   flex: 1;
   background: linear-gradient(rgba(44, 62, 80, 0.4), rgba(44, 62, 80, 0.4)), 
@@ -30,6 +40,7 @@ main { display: flex; height: calc(100vh - 60px); width: 100%; }
   color: white;
 }
 
+/* Right side of the login screen — light background with the login/signup form centered */
 .login-form-section {
   flex: 1;
   display: flex;
@@ -39,6 +50,7 @@ main { display: flex; height: calc(100vh - 60px); width: 100%; }
 }
 
 /* cards and forms */
+/* The white rounded box used for the login form and the report form on the dashboard */
 .card {
   background: white;
   width: 100%;
@@ -48,6 +60,7 @@ main { display: flex; height: calc(100vh - 60px); width: 100%; }
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
+/* Styles all input fields and textareas — full width, padded, with a light border */
 input, textarea {
   width: 100%;
   padding: 12px;
@@ -56,6 +69,7 @@ input, textarea {
   border-radius: 6px;
 }
 
+/* Shared sizing styles for both button types */
 .btn-primary, .btn-secondary {
   width: 100%;
   padding: 12px;
@@ -64,12 +78,18 @@ input, textarea {
   font-size: 1rem;
 }
 
+/* Blue button used for primary actions like Sign Up and Post for Approval */
 .btn-primary { background: #3498db; color: white; border: none; font-weight: bold; cursor: pointer; }
+
+/* Dark button used for secondary actions like Log In */
 .btn-secondary { background: #2c3e50; color: white; border: none; font-weight: bold; cursor: pointer; }
 
 /* dashboard and posts */
+/* Centers and constrains the width of the main content area on the dashboard pages */
 .admin-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
 
+/* Arranges post cards in a responsive grid — cards are at least 280px wide
+   and the grid adjusts the number of columns automatically based on screen size */
 .post-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -77,6 +97,7 @@ input, textarea {
   padding: 20px 0;
 }
 
+/* Individual post card — white background, rounded corners, blue top border accent */
 .post {
   background: white;
   padding: 15px;
@@ -85,6 +106,7 @@ input, textarea {
   border-top: 4px solid #3498db;
 }
 
+/* Styles the post image — fills the card width, fixed height, crops to fit */
 /* Fix for broken images — fallback background before image loads */
 .post-img {
   width: 100%;
@@ -95,6 +117,7 @@ input, textarea {
   display: block;
 }
 
+/* The yellow reward badge shown on each post card */
 .reward-tag {
   background: #fff9db;
   color: #f59f00;
@@ -106,9 +129,11 @@ input, textarea {
   border: 1px dashed #f59f00;
 }
 
+/* The green Approve button shown on post cards in the admin panel */
 .approve-btn { background: #2ecc71; color: white; width: auto; margin-right: 5px; }
 
 /*Search bar prettying*/
+/* Extra styling for the search bar — larger font and smooth focus transition */
 #searchInput {
   padding-left: 15px;
   font-size: 1.1rem;
@@ -116,13 +141,31 @@ input, textarea {
   transition: 0.3s;
 }
 
+/* Adds a blue glow effect around the search bar when the user clicks into it */
 #searchInput:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
 }
 
+/* Contact info block shown at the bottom of each post card.
+   Light blue background to visually separate it from the rest of the post details */
+.contact-info {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #eaf4fb;
+  border-left: 3px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: #2c3e50;
+}
+
+.contact-info p {
+  margin: 3px 0;
+}
+
 /* ABOUT PAGE */
 
+/* Arranges team member cards in a responsive grid on the About page */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -130,6 +173,7 @@ input, textarea {
   margin-top: 20px;
 }
 
+/* Individual team member card — centered text, light background, subtle border */
 .team-member {
   text-align: center;
   padding: 15px;
@@ -138,11 +182,13 @@ input, textarea {
   border: 1px solid #e9ecef;
 }
 
+/* Team member name styling */
 .team-member h4 {
   color: #2c3e50;
   margin-bottom: 5px;
 }
 
+/* Team member role styling — blue */
 .team-member p {
   font-size: 0.85rem;
   color: #3498db;

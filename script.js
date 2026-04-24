@@ -39,7 +39,7 @@ protectAdminPage();
 
 /* cloud post logic */
 // This function runs when the user clicks "Post for Approval" on the user dashboard.
-// It collects all the form values (item name, location, description, reward, and photo),
+// It collects all the form values including the three optional contact fields,
 // converts the photo into a base64 text string using FileReader so it can be stored
 // in the database, then pushes the entire post object to Firebase with a status of "pending".
 // It also saves the current logged-in username so it shows on the post card.
@@ -54,6 +54,11 @@ function addPost() {
 
     // Get the currently logged-in username from localStorage to attach to the post
     const currentUser = localStorage.getItem("currentUser") || "Anonymous";
+
+    // Collect the optional contact fields (empty string if left blank)
+    const contactEmail = document.getElementById("contactEmail").value;
+    const contactFacebook = document.getElementById("contactFacebook").value;
+    const contactPhone = document.getElementById("contactPhone").value;
 
     if (!item || !loc || !desc || !file) return alert("Please fill all details and pick a photo!");
 
@@ -70,6 +75,10 @@ function addPost() {
             reward: reward,
             image: base64Image, // save the text string
             postedBy: currentUser, // saves who posted this item
+            // Save contact info — only saved if the user filled them in
+            contactEmail: contactEmail || "Not provided",
+            contactFacebook: contactFacebook || "Not provided",
+            contactPhone: contactPhone || "Not provided",
             status: "pending",
             timestamp: Date.now()
         };
@@ -83,6 +92,9 @@ function addPost() {
                 document.getElementById("description").value = "";
                 document.getElementById("reward").value = "";
                 document.getElementById("itemImg").value = "";
+                document.getElementById("contactEmail").value = "";
+                document.getElementById("contactFacebook").value = "";
+                document.getElementById("contactPhone").value = "";
 
                 // Show a visible on-page success message instead of alert + reload
                 const msg = document.getElementById("postStatusMsg");
@@ -132,6 +144,16 @@ function loadDashboard() {
                             <p><b>👤 Posted by:</b> ${p.postedBy || "Anonymous"}</p>
                             <p><strong>Status:</strong> ${p.status}</p>
                             <p><strong>📅 Reported:</strong> ${new Date(p.timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                            
+                            <!-- Contact info section — only shows fields that were filled in -->
+                            <div class="contact-info">
+                                <p><b>📬 Contact via:</b></p>
+                                ${p.contactEmail !== "Not provided" ? `<p>📧 Email: ${p.contactEmail}</p>` : ""}
+                                ${p.contactFacebook !== "Not provided" ? `<p>📘 Facebook: ${p.contactFacebook}</p>` : ""}
+                                ${p.contactPhone !== "Not provided" ? `<p>📞 Phone: ${p.contactPhone}</p>` : ""}
+                                ${p.contactEmail === "Not provided" && p.contactFacebook === "Not provided" && p.contactPhone === "Not provided" ? `<p style="color:#999;">No contact info provided.</p>` : ""}
+                            </div>
+
                             ${adminDiv ? `
                                 <button class="approve-btn" onclick="approvePost('${key}')">Approve</button>
                                 <button onclick="deletePost('${key}')" style="background:#e74c3c; color:white; border:none; margin-top:5px; padding:5px; border-radius:4px; cursor:pointer;">Delete</button>

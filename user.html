@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Dashboard | Lost & Found</title>
+  <!-- Links the external stylesheet that controls the visual appearance of this page -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- The top navigation bar shown on every page, containing the logo and nav links -->
   <header>
     <div class="logo">Lost & Found Portal</div>
     <nav>
       <a href="user.html">Home</a> <a href="about.html">About</a>
+      <!-- Calls the logout() function in script.js to end the session -->
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
@@ -18,35 +22,65 @@
   <div class="admin-container">
     <div class="card" style="margin: 0 auto 40px auto;">
       <h3>Report a Lost Item</h3>
+
+      <!-- Input field for the name of the lost item -->
       <input type="text" id="item" placeholder="Item name">
+
+      <!-- Input field for where the item was lost or found -->
       <input type="text" id="location" placeholder="Where was it lost/found?">
-      
+
+      <!-- File input that lets the user upload a photo of the item from their device -->
       <div style="text-align: left; margin: 10px 0;">
         <label style="font-size: 0.8rem; color: #666;">Upload Photo:</label>
         <input type="file" id="itemImg" accept="image/*" style="border: none; padding: 5px 0;">
       </div>
 
-      <input type="text" id="reward" placeholder="Reward (e.g. $50 or 'Thank you')">
+      <!-- Optional input for any reward the owner is offering -->
+      <input type="text" id="reward" placeholder="Reward (e.g. ₱100 or 'Thank you')">
+
+      <!-- Textarea for a more detailed description of the lost item -->
       <textarea id="description" placeholder="Describe the item..."></textarea>
+
+      <!-- Contact info section — grouped under a label with three optional fields -->
+      <div style="text-align: left; margin: 10px 0;">
+        <label style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Contact me via:</label>
+        <input type="email" id="contactEmail" placeholder="Email (optional)">
+        <input type="text" id="contactFacebook" placeholder="Facebook (optional)">
+        <input type="text" id="contactPhone" placeholder="Phone Number (optional)">
+      </div>
+
+      <!-- Calls the addPost() function in script.js to submit the form to Firebase -->
       <button class="btn-primary" onclick="addPost()">Post for Approval</button>
-      
-      <!-- Success message shown after a post is submitted successfully -->
+
+      <!-- Success message shown after a post is submitted successfully.
+           Hidden by default (display:none) and made visible by addPost() in script.js.
+           Automatically hides itself again after 5 seconds. -->
       <p id="postStatusMsg" style="display:none; margin-top: 12px; padding: 10px 14px; background: #eafaf1; color: #27ae60; border: 1px solid #a9dfbf; border-radius: 6px; font-weight: bold;"></p>
     </div>
 
+    <!-- Visual divider between the report form and the approved items feed below -->
     <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 40px;">
 
+    <!-- Search bar that filters the approved posts in real time as the user types.
+         onkeyup fires filterSearch() in script.js on every keystroke -->
     <div style="margin-bottom: 20px;">
       <input type="text" id="searchInput" onkeyup="filterSearch()" placeholder="Search for items (e.g., 'Wallet', 'Keys')..." style="border: 2px solid #3498db;">
     </div>
 
     <h2>Recent Approved Items</h2>
+
+    <!-- This div is the target container where approved posts are rendered by loadDashboard().
+         The id "userFeed" is what tells script.js it's on the user page,
+         so it only shows posts with an "Approved" status. -->
     <div id="userFeed" class="post-grid"></div>
   </div>
 
   <!-- CDN (Content Delivery Network) -->
+  <!-- These two scripts load Firebase from the internet. They MUST come before script.js
+       because script.js uses firebase, which won't exist unless these load first -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <!-- Our main JavaScript file containing all the logic for login, signup, and posts -->
   <script src="script.js"></script>
   <!-- CDN -->
 
